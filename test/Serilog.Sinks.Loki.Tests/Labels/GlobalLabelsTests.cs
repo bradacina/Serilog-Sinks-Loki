@@ -30,11 +30,11 @@ namespace Serilog.Sinks.Loki.Tests.Labels
             
             // Act
             log.Error("Something's wrong");
+            log.Dispose();
             
             // Assert
             var response = JsonConvert.DeserializeObject<TestResponse>(_client.Content);
             response.Streams.First().Labels.ShouldBe("{level=\"error\",app=\"tests\"}");
-            log.Dispose();
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Serilog.Sinks.Loki.Tests.HttpClientTests
 
             // Act
             log.Error("Something's wrong");
+            log.Dispose();
 
             // Assert
             var auth = _client.Client.DefaultRequestHeaders.Authorization;
@@ -32,7 +33,6 @@ namespace Serilog.Sinks.Loki.Tests.HttpClientTests
                 () => auth.Scheme.ShouldBe("Basic"),
                 () => auth.Parameter.ShouldBe("V2FsdGVyOldoaXRl")
             );
-            log.Dispose();
         }
 
         [Fact]
@@ -47,10 +47,10 @@ namespace Serilog.Sinks.Loki.Tests.HttpClientTests
 
             // Act
             log.Error("Something's wrong");
+            log.Dispose();
 
             // Assert
             _client.Client.DefaultRequestHeaders.Authorization.ShouldBeNull();
-            log.Dispose();
         }
     }
 }

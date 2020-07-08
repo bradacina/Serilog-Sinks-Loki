@@ -26,11 +26,11 @@ namespace Serilog.Sinks.Loki.Tests.HttpClientTests
 
             // Act
             log.Error("Something's wrong");
+            log.Dispose();
 
             // Assert
             _client.Content.ShouldMatchApproved(x => x.WithScrubber(s => Regex.Replace(s,
                 @"\d{1,2}\d{1,2}\d{2,4}-\d{1,2}-\d{1,2}T\d{1,2}:\d{1,2}:\d{1,2}.\d{1,7}\+\d{2}:\d{2}", "<datetime>")));
-            log.Dispose();
         }
     }
 }

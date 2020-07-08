@@ -27,10 +27,10 @@ namespace Serilog.Sinks.Loki.Tests.HttpClientTests
             
             // Act
             log.Error("Something's wrong");
+            log.Dispose();
 
             // Assert
             _client.RequestUri.ShouldBe(LokiRouteBuilder.BuildPostUri(credentials.Url));
-            log.Dispose();
         }
     }
 }

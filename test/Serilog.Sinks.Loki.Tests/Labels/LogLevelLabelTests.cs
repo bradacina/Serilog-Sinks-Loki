@@ -28,11 +28,11 @@ namespace Serilog.Sinks.Loki.Tests.Labels
             
             // Act
             log.Debug("Debug Level");
+            log.Dispose();
             
             // Assert
             var response = JsonConvert.DeserializeObject<TestResponse>(_client.Content);
             response.Streams.First().Labels.ShouldBe("{level=\"debug\"}");
-            log.Dispose();
         }
         
         [Fact]
@@ -46,11 +46,11 @@ namespace Serilog.Sinks.Loki.Tests.Labels
             
             // Act
             log.Information("Information Level");
+            log.Dispose();
             
             // Assert
             var response = JsonConvert.DeserializeObject<TestResponse>(_client.Content);
             response.Streams.First().Labels.ShouldBe("{level=\"info\"}");
-            log.Dispose();
         }
 
         [Fact]
@@ -64,11 +64,11 @@ namespace Serilog.Sinks.Loki.Tests.Labels
             
             // Act
             log.Error("Error Level");
+            log.Dispose();
             
             // Assert
             var response = JsonConvert.DeserializeObject<TestResponse>(_client.Content);
             response.Streams.First().Labels.ShouldBe("{level=\"error\"}");
-            log.Dispose();
         }
     }
 }
